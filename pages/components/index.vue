@@ -1,16 +1,49 @@
 <template>
-  <div>
-    <button @click="changeSelected('basicHeader')">Basic Header</button>
-    <button @click="changeSelected('largeHeader')">Large Header</button>
+  <div class="flex flex-row">
+    <sidebar/>
+    <div class="flex flex-col">
+      <div>
+        <h2>Headers</h2>
+        <div class="flex flex-wrap">
+          <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" @click="changeSelected('basicHeader', 'header')">Header Basic</button>
+        <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" @click="changeSelected('largeHeader', 'header')">Header Large</button>
+        </div>
+      </div>
+      <div>
+        <h2>Mains</h2>
+        <div class="flex flex-wrap">
+          <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" @click="changeSelected('basicMain', 'main')">Main Basic</button>
+          <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" @click="changeSelected('largeMain', 'main')">Main Large</button>
+        </div>
+      </div>
+      
+    </div>
+
   </div>
 </template>
 
 <script>
+import nuxtStorage from "nuxt-storage";
+import sidebar from '~/components/sidebar.vue';
+
 export default {
-  name: "ComponentIndex",
-  methods: {
-    changeSelected(choice) {
-      this.$localStorage.updateValues(choice);
+  components: { sidebar },
+  name: "ComponentIndex", 
+  setup(context){
+    
+    /**
+   * Set the localStorage value
+   *
+   * @param {string} choice The name of the component
+   * @param {string} type MUST BE header, main OR footer
+   */
+    const changeSelected = (choice, type) => {
+      nuxtStorage.localStorage.setData(type, choice, 10, 'd');
+    }
+
+
+    return {
+      changeSelected
     }
   }
 };

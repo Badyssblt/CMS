@@ -4,6 +4,7 @@
          <component :is="headerComponent" />
       </header>
       <main ref="mainRef">
+         <component :is="mainComponent"/>
       </main>
       <footer ref="footerRef">
       </footer>
@@ -12,7 +13,6 @@
 
 <script>
 import { ref, onMounted } from "vue";
-import selectedComp from '../selected';
 
 export default {
    name: "baseStructure",
@@ -26,17 +26,25 @@ export default {
       const headerRef = ref(null);
       const mainRef = ref(null);
       const footerRef = ref(null);
+
+      // props of structure
       const headerComponent = ref(null);
       const mainComponent = ref(null);
+
+      // Data contains name of components selected
       const data = ref(props.data);
 
       const insertIntoHeader = (html) => {
          headerRef.value.innerHTML = html;
       }
 
+      const insertIntoMain = (html) => {
+         mainRef.value.innerHTML = html;
+      }
+
       onMounted(async () => {
          await getHeaderSelected();
-         console.log(selectedComp);
+         await getMainSelected();
       });
 
       const getHeaderSelected = async () => {
@@ -49,13 +57,24 @@ export default {
          }
       }
 
+      const getMainSelected = async () => {
+         try {
+            const mainModule = await import(`@/components/mains/${data.value.main}.vue`);
+            mainComponent.value = mainModule.default;
+         } catch (error) {
+            console.error("Erreur lors de l'importation du composant main :", error);
+         }
+      }
+
       const checkStruct = (data) => {
          if(!data["header"] || !data["main"] || !data["footer"]) return;
       }
 
       return {
          headerRef,
-         headerComponent
+         headerComponent,
+         mainRef, 
+         mainComponent
       }
    }
 }

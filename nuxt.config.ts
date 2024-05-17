@@ -7,8 +7,5 @@ export default defineNuxtConfig({
       tailwindcss: {},
       autoprefixer: {},
     },
-  },
-  plugins: [
-    '~/plugins/localStorage.js'
-  ],
+  }
 })
