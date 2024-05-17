@@ -12,7 +12,6 @@
 
 <script>
 import { ref, onMounted } from "vue";
-import selectedComp from '../selected';
 
 export default {
    name: "baseStructure",
