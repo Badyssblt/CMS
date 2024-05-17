@@ -3,21 +3,66 @@
     <sidebar/>
     <div class="flex flex-col">
       <div>
-        <h2>Headers</h2>
+        <h2 class="font-bold text-xl">Headers</h2>
         <div class="flex flex-wrap">
-          <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" @click="changeSelected('basicHeader', 'header')">Header Basic</button>
-        <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" @click="changeSelected('largeHeader', 'header')">Header Large</button>
+          <div>
+            <div class="block">
+            <img
+              alt=""
+              src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+              class="h-64 w-full object-cover sm:h-80 lg:h-96"
+            />
+
+            <h3 class="mt-4 text-lg font-bold text-gray-900 sm:text-xl">Header Basic</h3>
+            <set-component-button name="basicHeader" type="header"/>
+            </div>
+          </div>
+          <div>
+            <div class="block">
+            <img
+              alt=""
+              src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+              class="h-64 w-full object-cover sm:h-80 lg:h-96"
+            />
+
+            <h3 class="mt-4 text-lg font-bold text-gray-900 sm:text-xl">Header Large</h3>
+            <set-component-button name="largeHeader" type="header"/>
+            </div>
+          </div>
         </div>
       </div>
       <div>
-        <h2>Mains</h2>
+        <h2 class="font-bold text-xl">Mains</h2>
         <div class="flex flex-wrap">
-          <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" @click="changeSelected('basicMain', 'main')">Main Basic</button>
-          <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" @click="changeSelected('largeMain', 'main')">Main Large</button>
+          <div>
+            <div class="block">
+            <img
+              alt=""
+              src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+              class="h-64 w-full object-cover sm:h-80 lg:h-96"
+            />
+
+            <h3 class="mt-4 text-lg font-bold text-gray-900 sm:text-xl">Header Basic</h3>
+            <set-component-button name="basicHeader" type="header"/>
+            </div>
+          </div>
+          <div>
+            <div class="block">
+            <img
+              alt=""
+              src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+              class="h-64 w-full object-cover sm:h-80 lg:h-96"
+            />
+
+            <h3 class="mt-4 text-lg font-bold text-gray-900 sm:text-xl">Header Large</h3>
+            <set-component-button name="largeHeader" type="header"/>
+            </div>
+          </div>
         </div>
       </div>
       
     </div>
+    
 
   </div>
 </template>
@@ -25,26 +70,14 @@
 <script>
 import nuxtStorage from "nuxt-storage";
 import sidebar from '~/components/sidebar.vue';
+import SetComponentButton from '~/components/buttons/SetComponentButton.vue';
 
 export default {
-  components: { sidebar },
+  components: { sidebar, SetComponentButton },
   name: "ComponentIndex", 
   setup(context){
     
-    /**
-   * Set the localStorage value
-   *
-   * @param {string} choice The name of the component
-   * @param {string} type MUST BE header, main OR footer
-   */
-    const changeSelected = (choice, type) => {
-      nuxtStorage.localStorage.setData(type, choice, 10, 'd');
-    }
-
-
-    return {
-      changeSelected
-    }
+    
   }
 };
 </script>
