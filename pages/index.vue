@@ -2,6 +2,7 @@
 <div class="flex flex-row">
     <sidebar/>
     <base-structure-vue :data="data" class="flex-1"/>
+    <validate-changement-component :componentName="'basicHeader'" :type="'header'"/>
 </div>
 
 </template>
@@ -10,12 +11,15 @@
 import nuxtStorage from "nuxt-storage";
 import BaseStructureVue from '~/components/structures/BaseStructure.vue'
 import Sidebar from '~/components/sidebar.vue'
+import ValidateChangementComponent from '../components/forms/ValidateChangementComponent.vue';
 
 export default {
     name: "index",
     components:  {
         BaseStructureVue,
-        Sidebar    },
+        Sidebar,
+        ValidateChangementComponent    
+    },
     setup(){
 
         const data = ref({});
