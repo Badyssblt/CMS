@@ -1,10 +1,13 @@
 <template>
-<div class="flex flex-row">
+  <div class="flex flex-row">
     <sidebar/>
     <base-structure-vue :data="data" class="flex-1"/>
-    <validate-changement-component :componentName="'basicHeader'" :type="'header'"/>
-</div>
-
+    <validate-changement-component 
+      v-if="lastClicked" 
+      :componentName="lastClicked.name" 
+      :type="lastClicked.type"
+    />
+  </div>
 </template>
 
 <script>
@@ -14,30 +17,26 @@ import Sidebar from '~/components/sidebar.vue'
 import ValidateChangementComponent from '../components/forms/ValidateChangementComponent.vue';
 
 export default {
-    name: "index",
-    components:  {
-        BaseStructureVue,
-        Sidebar,
-        ValidateChangementComponent    
-    },
-    setup(){
+  name: "index",
+  components: {
+    BaseStructureVue,
+    Sidebar,
+    ValidateChangementComponent    
+  },
+  setup() {
+    const data = ref({
+      header: nuxtStorage.localStorage.getData("header") || {},
+      main: nuxtStorage.localStorage.getData("main") || {}
+    });
 
-        const data = ref({});
-        data.value = {
-            header: (nuxtStorage.localStorage.getData("header")),
-            main: (nuxtStorage.localStorage.getData("main"))
-        }
+    const lastClicked = ref(nuxtStorage.localStorage.getData("lastClicked") || { name: '', type: '' });
 
-        
-    
-        
-        return {
-            data
-        }
-    }
+    return {
+      data,
+      lastClicked
+    };
+  }
 }
 </script>
 
-<style>
 
-</style>

@@ -1,10 +1,10 @@
 <template>
    <div>
-      <header ref="headerRef">
+      <header ref="headerRef" @click="handleClick('header', data.header)" :key="Object.keys(data.header)">
          <component :is="headerComponent" />
       </header>
-      <main ref="mainRef">
-         <component :is="mainComponent"/>
+      <main ref="mainRef" @click="handleClick('main', data.main)" :key="Object.keys(data.main)">
+         <component :is="mainComponent" />
       </main>
       <footer ref="footerRef">
       </footer>
@@ -13,6 +13,7 @@
 
 <script>
 import { ref, onMounted } from "vue";
+import nuxtStorage from "nuxt-storage";
 
 export default {
    name: "baseStructure",
@@ -74,11 +75,18 @@ export default {
          if(!data["header"] || !data["main"] || !data["footer"]) return;
       }
 
+      // set the name of the element clicked in localStorage
+      const handleClick = (type, name) => {
+         nuxtStorage.localStorage.setData("lastClicked", {type, name}, 10, 'd');
+      }
+
       return {
          headerRef,
          headerComponent,
          mainRef, 
-         mainComponent
+         mainComponent,
+         data,
+         handleClick
       }
    }
 }

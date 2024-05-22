@@ -22,7 +22,7 @@ export default {
     const data = 
     {
       header: [
-        "basicHeader", "largeHeader"
+        "basicHeader", "largeHeader", "helloHeader"
       ],
       main: [
         "basicMain", "largeMain"
